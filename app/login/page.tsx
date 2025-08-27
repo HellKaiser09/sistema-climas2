@@ -45,15 +45,6 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-tecmilenio-50 via-white to-tecmilenio-50 flex items-center justify-center p-4">
       {/* Background Pattern */}
       <div className="w-full max-w-md mx-auto lg:mx-0">
-        {/* Back to Home Link */}
-        <Link
-          href="/"
-          className="inline-flex items-center text-tecmilenio-700 hover:text-tecmilenio mb-6 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver al inicio
-        </Link>
-
         <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
           <CardHeader className="text-center pb-6">
             <div className="w-12 h-12 bg-tecmilenio rounded-xl flex items-center justify-center mx-auto mb-4">
@@ -125,7 +116,7 @@ export default function LoginPage() {
 
         {/* Mobile Branding */}
         <div className="lg:hidden text-center mt-8">
-          <p className="text-gray-600">Feria de Empleo TecMilenio 2024</p>
+          <p className="text-gray-600">Rodzak S.A de C.V</p>
         </div>
       </div>
     </div>
