@@ -42,7 +42,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tecmilenio-50 via-white to-tecmilenio-50 flex items-center justify-center p-4">
+    <div className="min-h-[85vh] bg-gradient-to-br from-tecmilenio-50 via-white to-tecmilenio-50 flex items-center justify-center p-4">
       {/* Background Pattern */}
       <div className="w-full max-w-md mx-auto lg:mx-0">
         <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
