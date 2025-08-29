@@ -2,6 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Quitar cursor de texto en elementos no editables */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+/* Permitir selección solo en inputs, textareas y elementos editables */
+input,
+textarea,
+[contenteditable="true"],
+[contenteditable=""] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+
+/* Cursor pointer para elementos clickeables */
+button,
+a,
+[role="button"],
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* Al final del archivo, después de las reglas existentes */
+* {
+  outline: none !important;
+}
+
+/* O si prefieres ser más específico, solo en botones y elementos clickeables */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+  outline: none !important;
+}
+
+/* También puedes quitar el ring de Tailwind */
+.focus\:ring-0:focus {
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
