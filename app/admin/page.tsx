@@ -280,22 +280,16 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-custom-green py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
+
         {/* Encabezado con título y botón de Registro de Empresas */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <div className="mb-4 md:mb-0">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Panel de Administrador</h1>
-            <p className="text-lg text-gray-300">Selección de ganadores de la rifa</p>
+          <div className="mb-4 md:mb-0 ">
+            <h1 className="text-3xl md:text-4xl font-bold text-black mb-2">Panel de Gerente de ventas</h1>
           </div>
           <div className="flex gap-4">
             <Link href="/admin/empresas">
               <Button className="bg-white text-custom-green hover:bg-gray-100">
-                Lista de empresas
-              </Button>
-            </Link>
-
-            <Link href="/winner">
-              <Button variant="outline" className="bg-white text-admin-blue hover:bg-gray-100">
-                Selección de Ganador
+                Lista de empleados
               </Button>
             </Link>
           </div>
@@ -306,7 +300,7 @@ export default function AdminPage() {
           {/* Campus Distribution Chart */}
           <Card className="bg-white border border-gray-200 shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Distribución por Campus</CardTitle>
+              <CardTitle className="text-sm font-medium">Distribucion de tipo de cliente</CardTitle>
               <PieChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent className="h-64">
@@ -354,7 +348,7 @@ export default function AdminPage() {
           {/* Career Distribution Chart */}
           <Card className="bg-white border border-gray-200 shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Top 5 Carreras</CardTitle>
+              <CardTitle className="text-sm font-medium">Top 5 Vendedores</CardTitle>
               <PieChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent className="h-64">
@@ -388,7 +382,7 @@ export default function AdminPage() {
           {/* User Type Distribution Chart */}
           <Card className="bg-white border border-gray-200 shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tipo de Usuario</CardTitle>
+              <CardTitle className="text-sm font-medium">Tipo Lids/Ventas</CardTitle>
               <PieChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent className="h-64">
@@ -438,13 +432,13 @@ export default function AdminPage() {
           {/* Total de Participantes */}
           <Card className="bg-white border border-gray-200 shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Participantes</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Lids</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{students.length}</div>
               <p className="text-xs text-muted-foreground">
-                Estudiantes registrados
+                Lids registradas
               </p>
             </CardContent>
           </Card>
@@ -452,13 +446,13 @@ export default function AdminPage() {
           {/* Total de Empresas */}
           <Card className="bg-white border border-gray-200 shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total de Empresas</CardTitle>
+              <CardTitle className="text-sm font-medium">Ventas registradas</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{empresas.length}</div>
               <p className="text-xs text-muted-foreground">
-                Empresas registradas
+                Ventas registradas
               </p>
             </CardContent>
           </Card>
@@ -481,7 +475,7 @@ export default function AdminPage() {
         {/* Lista de Participantes */}
         <Card className="bg-white border border-gray-200 shadow-lg">
           <CardHeader>
-            <CardTitle>Lista de Participantes</CardTitle>
+            <CardTitle>Lista de Compradores</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
@@ -489,10 +483,11 @@ export default function AdminPage() {
                 <thead>
                   <tr className="border-b">
                     <th className="text-left py-3 px-4">Nombre</th>
-                    <th className="text-left py-3 px-4">Matrícula</th>
-                    <th className="text-left py-3 px-4">Carrera</th>
-                    <th className="text-left py-3 px-4">Campus</th>
-                    <th className="text-left py-3 px-4">Tipo</th>
+                    <th className="text-left py-3 px-4">Forma de contacto</th>
+                    <th className="text-left py-3 px-4">Necesidad</th>
+                    <th className="text-left py-3 px-4">Tipo de servicio</th>
+                    <th className="text-left py-3 px-4">Urgencia</th>
+                    <th className='text-left py-3 px-4'>Venta</th>
                   </tr>
                 </thead>
                 <tbody>
