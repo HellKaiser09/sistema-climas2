@@ -7,13 +7,15 @@ import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'), // Para desarrollo
+  // metadataBase: new URL('https://tu-dominio.com'), // Para producción
   title: 'Feria del Empleo Tecmilenio Campus San Nicolás',
   description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
   openGraph: {
     title: 'Feria del Empleo Tecmilenio',
     description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
     images: [{
-      url: 'https://tecmi-rifa.vercel.app/feria.jpg',
+      url: '/feria.jpg', // Ahora será resuelto correctamente con metadataBase
       width: 1200,
       height: 630,
       alt: 'Feria del Empleo Tecmilenio',
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Feria del Empleo Tecmilenio',
     description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
-    images: ['https://tecmi-rifa.vercel.app/feria.jpg'],
+    images: ['/feria.jpg'], // También será resuelto correctamente
   },
 };
 
