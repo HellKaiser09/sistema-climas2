@@ -1,4 +1,6 @@
 "use client";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -10,9 +12,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const links = [
     { href: "/admin", label: "Dashboard", icon: <Home size={18} /> },
     { href: "/admin/clientes", label: "Clientes", icon: <Users size={18} /> },
-    { href: "/admin/empresas", label: "Empresas", icon: <Building2 size={18} /> },
-    { href: "/admin/reportes", label: "Reportes", icon: <BarChart3 size={18} /> },
-    { href: "/admin/configuracion", label: "Configuración", icon: <Settings size={18} /> },
+    { href: "/admin/sales_items", label: "Items", icon: <RiMoneyDollarCircleLine /> },
+    { href: "/admin/sales_objectives", label: "Objetivo de ventas", icon: <BarChart3 size={18} /> },
+    { href: "/admin/sales", label: "Ventas", icon: <LiaMoneyBillWaveSolid size={18}/> },
   ];
 
   return (
