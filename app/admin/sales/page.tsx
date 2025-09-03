@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { saveSale } from "../../lib/supabase/sales";
-import { createClient } from "../../lib/supabase/client";
+import { saveSale } from "../../../lib/supabase/sales";
+import { createClient } from "../../../lib/supabase/client";
+
 
 const supabase = createClient();
 
@@ -74,7 +75,7 @@ const SaleForm = () => {
     const amountNum = Number(totalAmount);
 
     if (amountNum < 0) {
-      setMessage("❌ El monto total no puede ser negativo");
+      setMessage("El monto total no puede ser negativo");
       return;
     }
 
@@ -92,7 +93,7 @@ const SaleForm = () => {
       if (checkError) throw checkError;
 
       if (existingSales && existingSales.length > 0) {
-        setMessage(`❌ Ya existe una venta registrada para la fecha ${serviceDateOnly}`);
+        setMessage(`Ya existe una venta registrada para la fecha ${serviceDateOnly}`);
         return;
       }
 
@@ -111,7 +112,7 @@ const SaleForm = () => {
         status,
       });
 
-      setMessage("✅ Venta creada exitosamente");
+      setMessage("Venta creada exitosamente");
 
       // Reset formulario
       setLeadId("");
@@ -127,7 +128,7 @@ const SaleForm = () => {
       setStatus("pending");
     } catch (error: any) {
       console.error(error);
-      setMessage(`❌ Error: ${error.message || "Revisa la consola"}`);
+      setMessage(`Error: ${error.message || "Revisa la consola"}`);
     }
   };
 
