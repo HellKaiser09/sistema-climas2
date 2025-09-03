@@ -18,9 +18,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: "/admin/em", label: "Empresas", icon: <Building2 size={18} /> },
     { href: "/admin/reportes", label: "Reportes", icon: <BarChart3 size={18} /> },
     { href: "/admin/productos", label: "Productos", icon: <PackageSearch size={18} /> },
-    { href: "/admin/sales_items", label: "Items", icon: <RiMoneyDollarCircleLine /> },
-    { href: "/admin/sales_objectives", label: "Objetivo de ventas", icon: <BarChart3 size={18} /> },
-    { href: "/admin/sales", label: "Ventas", icon: <LiaMoneyBillWaveSolid size={18}/> },
   ];
 
   return (
@@ -44,8 +41,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           ))}
         </nav>
       </aside>
-
-      {/* Contenido principal */}
       <section className="flex-1 bg-gray-50 overflow-y-auto">{children}</section>
     </main>
   );
