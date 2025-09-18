@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { createClient } from '@/lib/supabase/client';
+import { createClient, supabaseClient } from '@/lib/supabase/client';
 import { toast } from "sonner"
 import MainLayout from "@/Layouts/MainLayout"
 
@@ -21,17 +21,19 @@ export default function ContactPage() {
     handleSubmit,
     formState: { errors, isSubmitting }
   } = useForm<FormValues>()
-  const supabase = createClient();
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const { error } = await supabase.from('contact_messages').insert([
-        {
-          name: data.name,
-          email: data.email,
-          message: data.message
-        }
-      ])
+      const { error } = await supabaseClient
+        .from('contact_messages')
+        .insert([
+          {
+            name: data.name,
+            email: data.email,
+            message: data.message
+          }
+        ])
+        
       if (error) throw error
       toast("Mensaje enviado con éxito")
       console.log("Message sent successfully")

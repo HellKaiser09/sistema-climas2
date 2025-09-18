@@ -1,21 +1,39 @@
-import { createBrowserClient } from '@supabase/ssr'
+import { createBrowserClient } from "@supabase/ssr";
 
 export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      // Disable realtime to avoid Edge Runtime issues
-      realtime: {
-        params: {
-          eventsPerSecond: 1,
-        },
-      },
-      // Additional options to improve Edge Runtime compatibility
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-      },
-    }
-  )
+	return createBrowserClient(
+		process.env.NEXT_PUBLIC_SUPABASE_URL!,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+		{
+			// Disable realtime to avoid Edge Runtime issues
+			realtime: {
+				params: {
+					eventsPerSecond: 1,
+				},
+			},
+			// Additional options to improve Edge Runtime compatibility
+			auth: {
+				persistSession: true,
+				autoRefreshToken: true,
+			},
+		}
+	);
 }
+
+export const supabaseClient = createBrowserClient(
+	process.env.NEXT_PUBLIC_SUPABASE_URL!,
+	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+	{
+		// Disable realtime to avoid Edge Runtime issues
+		realtime: {
+			params: {
+				eventsPerSecond: 1,
+			},
+		},
+		// Additional options to improve Edge Runtime compatibility
+		auth: {
+			persistSession: true,
+			autoRefreshToken: true,
+		},
+	}
+);
