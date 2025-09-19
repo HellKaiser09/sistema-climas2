@@ -8,6 +8,7 @@ export interface SaleItem {
   quantity: number;
   unit_price: number;
   total_price: number;
+  client_name: string;
   
 }
 
@@ -18,7 +19,7 @@ export async function saveSaleItem(item: Omit<SaleItem, "created_at" | "updated_
   
   const itemWithId = {
     ...item,
-    sale_id: item.sale_id || uuidv4(),
+    client_name: item.client_name || uuidv4(),
   };
 
   const { data, error } = await supabase
@@ -27,7 +28,7 @@ export async function saveSaleItem(item: Omit<SaleItem, "created_at" | "updated_
     .select();
 
   if (error) {
-    console.error("Error guardando el item de venta:", error);
+    console.error("Error guardando el producto en la venta:", error);
     throw error;
   }
 

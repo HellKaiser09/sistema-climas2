@@ -12,6 +12,7 @@ interface Product {
 
 interface Sale {
   id: string;
+  client_name: string;
 }
 
 export default function SaleItemsPage() {
@@ -33,7 +34,7 @@ export default function SaleItemsPage() {
 
       const { data: salesData, error: salesError } = await supabase
         .from("sales")
-        .select("id");
+        .select("client_name");
 
       if (prodError) console.error("Error cargando productos:", prodError);
       if (salesError) console.error("Error cargando ventas:", salesError);
@@ -68,31 +69,32 @@ export default function SaleItemsPage() {
         quantity,
         unit_price: selectedProduct.price,
         total_price: selectedProduct.price * quantity,
+        client_name: sales.find(s => s.id === selectedSaleId)?.client_name || "Desconocido",
       });
 
-      setMessage(`Item agregado con id: ${selectedSaleId}`);
+      setMessage(`Producto agregado exitosamente a la venta: ${selectedSaleId}`);
       setSelectedProduct(null);
       setQuantity(1);
     } catch (err: any) {
       console.error(err);
-      setMessage("Error guardando el item: " + err.message);
+      setMessage("Error guardando el producto: " + err.message);
     }
   };
 
   return (
-    <div className="p-10 max-w-md mx-auto bg-white shadow-lg rounded-lg"> 
-      <h1 className="text-2xl font-bold mb-4 text-center">Agregar Items a Ventas</h1>
+    <div className="p-10 max-w-6xl mx-auto my-8  bg-white shadow-lg rounded-lg"> 
+      <h1 className="text-2xl font-bold mb-4 text-center">Agregar productos a ventas existentes</h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         <select
           value={selectedSaleId}
           onChange={(e) => setSelectedSaleId(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-1 border rounded"
         >
-          <option value="">-- Selecciona una venta existente --</option>
+          <option value="">-- Selecciona el nombre de un cliente con una venta ya existente --</option>
           {sales.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.id.slice(0, 8)}…
+            <option key={s.client_name} value={s.client_name}>
+              {s.client_name.slice()}
             </option>
           ))}
         </select>
@@ -103,7 +105,7 @@ export default function SaleItemsPage() {
             const prod = products.find((p) => p.id === e.target.value);
             setSelectedProduct(prod || null);
           }}
-          className="w-full p-2 border rounded"
+          className="w-full p-1 border rounded"
         >
           <option value="">-- Selecciona un producto --</option>
           {products.map((p) => (
@@ -114,12 +116,12 @@ export default function SaleItemsPage() {
         </select>
 
         <input
-          type="number"
+          type = "number"
           min={1}
-          value={quantity}
+          value={quantity === 0 ? "" : quantity}
           onChange={(e) => setQuantity(Number(e.target.value))}
-          className="w-full p-2 border rounded"
-          placeholder="Cantidad"
+          className="w-full p-1 border rounded"
+          placeholder="Cantidad de producto(s)"
         />
 
         {selectedProduct && (
