@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
-import { UserPlus, User, Mail, Lock, Building2, Plus, Edit, Save, X, Trash2 } from "lucide-react"
+import { UserPlus, User, Mail, Lock, Building2, Plus, Edit, Save, X, Trash2, Users } from "lucide-react"
 import Link from "next/link"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -147,220 +147,245 @@ export default function UserRegistration() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Encabezado */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Gestión de Clientes</h1>
-            <Button size="sm" onClick={() => setOpen(true)} className="h-8">
-              <Plus className="h-4 w-4" />
-            </Button>
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div className="space-y-1">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Users className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">Gestión de Clientes</h1>
+              <p className="text-sm text-muted-foreground">Administra y registra nuevos clientes</p>
+            </div>
           </div>
-          <p className="text-sm text-gray-600 mt-1">Registro y administración de clientes</p>
         </div>
+        <Button
+          onClick={() => setOpen(true)}
+          className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Nuevo Cliente
+        </Button>
+      </div>
 
-        {clientes.length > 0 && (
-          <Card className="bg-white shadow-sm border border-gray-200">
-            <CardHeader className="border-b border-gray-100 py-3">
-              <CardTitle className="text-lg font-semibold text-gray-900">Clientes Registrados</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="h-10">
-                    <TableHead className="py-2 text-xs font-medium">Nombre</TableHead>
-                    <TableHead className="py-2 text-xs font-medium">Email</TableHead>
-                    <TableHead className="py-2 text-xs font-medium">Dirección</TableHead>
-                    <TableHead className="text-right py-2 text-xs font-medium">Acciones</TableHead>
+      {clientes.length > 0 && (
+        <Card className="border-border/50 shadow-sm">
+          <CardHeader className="border-b border-border/50 pb-4">
+            <CardTitle className="text-lg font-medium text-foreground">
+              Clientes Registrados ({clientes.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-border/50">
+                  <TableHead className="font-medium text-muted-foreground">Nombre</TableHead>
+                  <TableHead className="font-medium text-muted-foreground">Email</TableHead>
+                  <TableHead className="font-medium text-muted-foreground">Dirección</TableHead>
+                  <TableHead className="text-right font-medium text-muted-foreground">Acciones</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {clientes.map((cliente) => (
+                  <TableRow key={cliente.id} className="border-border/50 hover:bg-muted/30 transition-colors">
+                    <TableCell className="py-4">
+                      {editingId === cliente.id ? (
+                        <Input
+                          value={editingData.nombre || ""}
+                          onChange={(e) => setEditingData({ ...editingData, nombre: e.target.value })}
+                          className="h-8 text-sm border-border/50 focus:border-primary"
+                        />
+                      ) : (
+                        <div className="font-medium text-foreground">{cliente.nombre}</div>
+                      )}
+                    </TableCell>
+                    <TableCell className="py-4">
+                      {editingId === cliente.id ? (
+                        <Input
+                          value={editingData.email || ""}
+                          onChange={(e) => setEditingData({ ...editingData, email: e.target.value })}
+                          className="h-8 text-sm border-border/50 focus:border-primary"
+                        />
+                      ) : (
+                        <div className="text-muted-foreground">{cliente.email}</div>
+                      )}
+                    </TableCell>
+                    <TableCell className="py-4">
+                      {editingId === cliente.id ? (
+                        <Input
+                          value={editingData.direccion || ""}
+                          onChange={(e) => setEditingData({ ...editingData, direccion: e.target.value })}
+                          className="h-8 text-sm border-border/50 focus:border-primary"
+                        />
+                      ) : (
+                        <div className="text-muted-foreground">{cliente.direccion}</div>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-right py-4">
+                      <div className="flex justify-end gap-2">
+                        {editingId === cliente.id ? (
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => saveEdit(cliente.id)}
+                              className="h-8 w-8 p-0 border-border/50 hover:bg-primary hover:text-primary-foreground"
+                            >
+                              <Save className="h-3 w-3" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={cancelEditing}
+                              className="h-8 w-8 p-0 border-border/50 hover:bg-muted bg-transparent"
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => startEditing(cliente)}
+                              className="h-8 w-8 p-0 border-border/50 hover:bg-muted"
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => deleteCliente(cliente.id)}
+                              className="h-8 w-8 p-0 border-border/50 hover:bg-destructive hover:text-destructive-foreground"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {clientes.map((cliente) => (
-                    <TableRow key={cliente.id} className="h-12">
-                      <TableCell className="py-2">
-                        {editingId === cliente.id ? (
-                          <Input
-                            value={editingData.nombre || ""}
-                            onChange={(e) => setEditingData({ ...editingData, nombre: e.target.value })}
-                            className="h-7 text-sm"
-                          />
-                        ) : (
-                          <span className="text-sm">{cliente.nombre}</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="py-2">
-                        {editingId === cliente.id ? (
-                          <Input
-                            value={editingData.email || ""}
-                            onChange={(e) => setEditingData({ ...editingData, email: e.target.value })}
-                            className="h-7 text-sm"
-                          />
-                        ) : (
-                          <span className="text-sm">{cliente.email}</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="py-2">
-                        {editingId === cliente.id ? (
-                          <Input
-                            value={editingData.direccion || ""}
-                            onChange={(e) => setEditingData({ ...editingData, direccion: e.target.value })}
-                            className="h-7 text-sm"
-                          />
-                        ) : (
-                          <span className="text-sm">{cliente.direccion}</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right py-2">
-                        <div className="flex justify-end gap-1">
-                          {editingId === cliente.id ? (
-                            <>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => saveEdit(cliente.id)}
-                                className="h-7 w-7 p-0"
-                              >
-                                <Save className="h-3 w-3" />
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={cancelEditing}
-                                className="h-7 w-7 p-0 bg-transparent"
-                              >
-                                <X className="h-3 w-3" />
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => startEditing(cliente)}
-                                className="h-7 w-7 p-0"
-                              >
-                                <Edit className="h-3 w-3" />
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => deleteCliente(cliente.id)}
-                                className="h-7 w-7 p-0 text-red-600 hover:text-red-700"
-                              >
-                                <Trash2 className="h-3 w-3" />
-                              </Button>
-                            </>
-                          )}
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {clientes.length === 0 && (
+        <Card className="border-border/50 shadow-sm">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+              <Users className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <h3 className="text-lg font-medium text-foreground mb-2">No hay clientes registrados</h3>
+            <p className="text-muted-foreground mb-6 max-w-sm">Comienza agregando tu primer cliente al sistema</p>
+            <Button onClick={() => setOpen(true)} className="bg-primary hover:bg-primary/90">
+              <Plus className="w-4 h-4 mr-2" />
+              Registrar Primer Cliente
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-md border-border/50">
+          <Card className="border-0 shadow-none">
+            <CardHeader className="text-center pb-6">
+              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <UserPlus className="w-6 h-6 text-primary" />
+              </div>
+              <CardTitle className="text-xl font-semibold text-foreground">Nuevo Cliente</CardTitle>
+              <p className="text-sm text-muted-foreground mt-2">Registra un nuevo cliente en el sistema</p>
+            </CardHeader>
+
+            <CardContent className="space-y-6">
+              <form onSubmit={handleRegistration} className="space-y-4">
+                <div className="space-y-4">
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Nombre completo"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="pl-10 h-11 border-border/50 focus:border-primary bg-background"
+                      required
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      type="email"
+                      placeholder="Correo electrónico"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-10 h-11 border-border/50 focus:border-primary bg-background"
+                      required
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      type="password"
+                      placeholder="Contraseña"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="pl-10 h-11 border-border/50 focus:border-primary bg-background"
+                      required
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Dirección"
+                      value={direccion}
+                      onChange={(e) => setDireccion(e.target.value)}
+                      className="pl-10 h-11 border-border/50 focus:border-primary bg-background"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full h-11 bg-primary hover:bg-primary/90 text-primary-foreground font-medium shadow-sm"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2"></div>
+                      Registrando...
+                    </div>
+                  ) : (
+                    "Registrar Cliente"
+                  )}
+                </Button>
+              </form>
+
+              <div className="text-center pt-4 border-t border-border/50">
+                <p className="text-sm text-muted-foreground">
+                  ¿Ya tienes cuenta?{" "}
+                  <Link href="/login" className="text-primary hover:text-primary/80 font-medium">
+                    Iniciar sesión
+                  </Link>
+                </p>
+              </div>
+
+              {msg && (
+                <div className="text-center">
+                  <p className={`text-sm ${msg.includes("Error") ? "text-destructive" : "text-primary"}`}>{msg}</p>
+                </div>
+              )}
             </CardContent>
           </Card>
-        )}
-
-        {/* Formulario de registro */}
-        <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-          <DialogContent className="max-w-md">
-            <div>
-              <Card className="bg-white shadow-sm border-0">
-                <CardHeader className="text-center border-b border-gray-100 pb-4">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    <UserPlus className="w-5 h-5 text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-gray-900">Registro de Clientes</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Crea tu cuenta en el sistema</p>
-                </CardHeader>
-
-                <CardContent className="p-4">
-                  <form onSubmit={handleRegistration} className="space-y-4">
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <Input
-                        type="text"
-                        placeholder="Nombre completo"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="pl-9 h-9 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white text-sm"
-                        required
-                      />
-                    </div>
-
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <Input
-                        type="email"
-                        placeholder="Correo electrónico"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="pl-9 h-9 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white text-sm"
-                        required
-                      />
-                    </div>
-
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <Input
-                        type="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="pl-9 h-9 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white text-sm"
-                        required
-                      />
-                    </div>
-
-                    <div className="relative">
-                      <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <Input
-                        type="text"
-                        placeholder="Dirección"
-                        value={direccion}
-                        onChange={(e) => setDireccion(e.target.value)}
-                        className="pl-9 h-9 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white text-sm"
-                        required
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full h-9 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-sm hover:shadow-md text-sm"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <div className="flex items-center">
-                          <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                          Registrando...
-                        </div>
-                      ) : (
-                        "Registrar Cliente"
-                      )}
-                    </Button>
-                  </form>
-
-                  <div className="text-center pt-4 border-t border-gray-100 mt-4">
-                    <p className="text-xs text-gray-500">
-                      ¿Ya tienes cuenta?{" "}
-                      <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
-                        Iniciar sesión
-                      </Link>
-                    </p>
-                  </div>
-
-                  {msg && (
-                    <div className="text-center mt-3">
-                      <p className={`text-xs ${msg.includes("Error") ? "text-red-600" : "text-green-600"}`}>{msg}</p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
