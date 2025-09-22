@@ -130,11 +130,11 @@ const SaleForm = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 space-y-6">
+    <div className="max-w-7xl mx-auto p-6 space-y-6 min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Gestión de Ventas</h1>
-          <p className="text-gray-600 mt-1">Registra y administra las ventas de tu negocio</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Gestión de Ventas</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-1">Registra y administra las ventas de tu negocio</p>
         </div>
         <Button onClick={() => setOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm">
           <Plus className="w-4 h-4 mr-2" />
@@ -146,8 +146,8 @@ const SaleForm = () => {
         <div
           className={`p-4 rounded-lg border ${
             message.includes("Error")
-              ? "bg-red-50 border-red-200 text-red-800"
-              : "bg-green-50 border-green-200 text-green-800"
+              ? "bg-red-50 border-red-200 text-red-800 dark:bg-red-900 dark:border-red-700 dark:text-red-200"
+              : "bg-green-50 border-green-200 text-green-800 dark:bg-green-900 dark:border-green-700 dark:text-green-200"
           }`}
         >
           <p className="font-medium">{message}</p>
@@ -155,9 +155,9 @@ const SaleForm = () => {
       )}
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-6 bg-white rounded-lg shadow-xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-6 bg-white dark:bg-black rounded-lg shadow-xl">
           <DialogHeader className="mb-6">
-            <DialogTitle className="text-2xl font-bold text-gray-900 flex items-center">
+            <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
               <Plus className="w-6 h-6 mr-2 text-blue-600" />
               Registrar Nueva Venta
             </DialogTitle>
@@ -167,7 +167,7 @@ const SaleForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Lead Selection */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700 flex items-center">
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
                   <UserIcon className="w-4 h-4 mr-2" />
                   Lead
                 </Label>
@@ -200,7 +200,7 @@ const SaleForm = () => {
 
               {/* User Selection */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Vendedor</Label>
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Vendedor</Label>
                 <Select value={salespersonId} onValueChange={setSalespersonId}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selecciona un Usuario" />
@@ -217,7 +217,7 @@ const SaleForm = () => {
 
               {/* Technician Selection */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Técnico</Label>
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Técnico</Label>
                 <Select value={technicianId} onValueChange={setTechnicianId}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selecciona un Técnico" />
@@ -234,7 +234,7 @@ const SaleForm = () => {
 
               {/* Service Date */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700 flex items-center">
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
                   <Calendar className="w-4 h-4 mr-2" />
                   Fecha de Servicio
                 </Label>
@@ -249,7 +249,7 @@ const SaleForm = () => {
 
               {/* Payment Method */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700 flex items-center">
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
                   <CreditCard className="w-4 h-4 mr-2" />
                   Método de Pago
                 </Label>
@@ -266,7 +266,7 @@ const SaleForm = () => {
 
               {/* Total Amount */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700">Monto Total</Label>
+                <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Monto Total</Label>
                 <Input
                   type="number"
                   placeholder="0.00"
@@ -280,14 +280,14 @@ const SaleForm = () => {
             </div>
 
             <div className="border-t pt-6 space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                 <FileText className="w-5 h-5 mr-2" />
                 Información de Facturación
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium text-gray-700">RFC</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">RFC</Label>
                   <Input
                     type="text"
                     placeholder="RFC del cliente"
@@ -298,7 +298,7 @@ const SaleForm = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium text-gray-700">Estado</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Estado</Label>
                   <Select value={status} onValueChange={(value: "pending" | "completed") => setStatus(value)}>
                     <SelectTrigger className="w-full">
                       <SelectValue />
@@ -313,30 +313,30 @@ const SaleForm = () => {
 
               <div className="flex items-center space-x-2">
                 <Checkbox id="requiresInvoice" checked={requiresInvoice} onCheckedChange={() => setRequiresInvoice(!requiresInvoice)} />
-                <Label htmlFor="requiresInvoice" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="requiresInvoice" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Requiere factura
                 </Label>
               </div>
             </div>
 
             <div className="border-t pt-6 space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Información del Cliente</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Información del Cliente</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium text-gray-700">Nombre</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</Label>
                   <Input
                     value={clientName}
                     readOnly
-                    className="bg-gray-50 text-gray-600"
+                    className="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                     placeholder="Se completará automáticamente"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-sm font-medium text-gray-700">Dirección</Label>
+                  <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">Dirección</Label>
                   <Input
                     value={clientAddress}
                     readOnly
-                    className="bg-gray-50 text-gray-600"
+                    className="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                     placeholder="Se completará automáticamente"
                   />
                 </div>
@@ -355,14 +355,14 @@ const SaleForm = () => {
         </DialogContent>
       </Dialog>
 
-      <Card className="shadow-sm">
-        <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl text-gray-900">Ventas Registradas</CardTitle>
+      <Card className="shadow-sm dark:bg-black dark:border-gray-800">
+        <CardHeader className="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-800">
+          <CardTitle className="text-xl text-gray-900 dark:text-white">Ventas Registradas</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {sales.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+            <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+              <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
               <p className="text-lg font-medium">No hay ventas registradas</p>
               <p className="text-sm">Haz clic en "Nueva Venta" para comenzar</p>
             </div>
@@ -370,33 +370,33 @@ const SaleForm = () => {
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gray-50">
-                    <TableHead className="font-semibold text-gray-900">Cliente</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Vendedor</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Técnico</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Fecha</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Pago</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Monto</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Estado</TableHead>
-                    <TableHead className="font-semibold text-gray-900">Factura</TableHead>
-                    <TableHead className="text-right font-semibold text-gray-900">Acciones</TableHead>
+                  <TableRow className="bg-gray-50 dark:bg-gray-800">
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Cliente</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Vendedor</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Técnico</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Fecha</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Pago</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Monto</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Estado</TableHead>
+                    <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Factura</TableHead>
+                    <TableHead className="text-right font-semibold text-gray-900 dark:text-gray-100">Acciones</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {sales.map((sale, i) => (
-                    <TableRow key={sale.id + i} className="hover:bg-gray-50">
-                      <TableCell className="font-medium text-gray-900">{sale.client_name}</TableCell>
-                      <TableCell className="text-gray-600">{sale.salesperson_id}</TableCell>
-                      <TableCell className="text-gray-600">{sale.technician_id}</TableCell>
-                      <TableCell className="text-gray-600">
+                    <TableRow key={sale.id + i} className="hover:bg-gray-50 dark:hover:bg-gray-900">
+                      <TableCell className="font-medium text-gray-900 dark:text-white">{sale.client_name}</TableCell>
+                      <TableCell className="text-gray-600 dark:text-gray-300">{sale.salesperson_id}</TableCell>
+                      <TableCell className="text-gray-600 dark:text-gray-300">{sale.technician_id}</TableCell>
+                      <TableCell className="text-gray-600 dark:text-gray-300">
                         {new Date(sale.service_date).toLocaleDateString("es-ES", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
                         })}
                       </TableCell>
-                      <TableCell className="capitalize text-gray-600">{sale.payment_method}</TableCell>
-                      <TableCell className="font-semibold text-green-600">
+                      <TableCell className="capitalize text-gray-600 dark:text-gray-300">{sale.payment_method}</TableCell>
+                      <TableCell className="font-semibold text-green-600 dark:text-green-400">
                         ${Number(sale.total_amount).toLocaleString("es-MX", { minimumFractionDigits: 2 })}
                       </TableCell>
                       <TableCell>
@@ -404,8 +404,8 @@ const SaleForm = () => {
                           variant={sale.status === "completed" ? "default" : "secondary"}
                           className={
                             sale.status === "completed"
-                              ? "bg-green-100 text-green-800 hover:bg-green-100"
-                              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100"
+                              ? "bg-green-100 text-green-800 hover:bg-green-100 dark:bg-green-900 dark:text-green-200"
+                              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-200"
                           }
                         >
                           {sale.status === "completed" ? "Completada" : "Pendiente"}
@@ -414,7 +414,7 @@ const SaleForm = () => {
                       <TableCell>
                         <Badge
                           variant={sale.requires_invoice ? "default" : "outline"}
-                          className={sale.requires_invoice ? "bg-blue-100 text-blue-800" : ""}
+                          className={sale.requires_invoice ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" : "dark:border-gray-600 dark:text-gray-300"}
                         >
                           {sale.requires_invoice ? "Sí" : "No"}
                         </Badge>
@@ -424,14 +424,14 @@ const SaleForm = () => {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-8 w-8 p-0 hover:bg-blue-50 hover:text-blue-600 bg-transparent"
+                            className="h-8 w-8 p-0 hover:bg-blue-50 hover:text-blue-600 bg-transparent dark:hover:bg-blue-900 dark:hover:text-blue-400 dark:border-gray-600"
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 bg-transparent"
+                            className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 bg-transparent dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900 dark:border-gray-600"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
