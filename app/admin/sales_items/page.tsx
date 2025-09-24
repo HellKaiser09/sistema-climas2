@@ -162,43 +162,6 @@ export default function SaleItemsPage() {
         </Button>
       </div>
 
-      <Card className="border-border/50 shadow-sm">
-        <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-lg font-medium text-foreground">
-            Productos Disponibles ({products.length})
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-border/50">
-                <TableHead className="font-medium text-muted-foreground">
-                  Producto
-                </TableHead>
-                <TableHead className="font-medium text-muted-foreground">
-                  Precio
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {products.map((product) => (
-                <TableRow
-                  key={product.id}
-                  className="border-border/50 hover:bg-muted/30 transition-colors"
-                >
-                  <TableCell className="py-4 font-medium text-foreground">
-                    {product.name}
-                  </TableCell>
-                  <TableCell className="py-4 text-muted-foreground">
-                    ${product.price.toLocaleString()}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-
       {/* Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md border-border/50">
