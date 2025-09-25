@@ -36,3 +36,20 @@ export async function getUsers() {
   if (error) throw error;
   return data;
 }
+
+export async function getSalesObjectives() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("sales_objectives")
+    .select(`
+      *,
+      users!sales_objectives_user_id_fkey(name)
+    `)
+    .order("created_at", { ascending: false });
+  
+  if (error) {
+    console.error("Error obteniendo objetivos de venta:", error);
+    throw error;
+  }
+  return data;
+}
