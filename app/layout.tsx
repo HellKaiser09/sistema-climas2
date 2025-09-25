@@ -9,21 +9,21 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'), // Para desarrollo
   // metadataBase: new URL('https://tu-dominio.com'), // Para producción
-  title: 'Feria del Empleo Tecmilenio Campus San Nicolás',
+  title: 'Sistema CRM',
   description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
   openGraph: {
-    title: 'Feria del Empleo Tecmilenio',
+    title: 'Sistema CRM',
     description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
     images: [{
       url: '/feria.jpg', // Ahora será resuelto correctamente con metadataBase
       width: 1200,
       height: 630,
-      alt: 'Feria del Empleo Tecmilenio',
+      alt: 'Sistema CRM',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Feria del Empleo Tecmilenio',
+    title: 'Sistema CRM',
     description: 'Registra tus datos para participar en nuestra rifa y ganar un premio',
     images: ['/feria.jpg'], // También será resuelto correctamente
   },
