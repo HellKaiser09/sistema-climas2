@@ -12,12 +12,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const links = [
     { href: "/admin", label: "Dashboard", icon: <Home size={20} /> },
+    { href: "/admin/productos", label: "Productos", icon: <PackageSearch size={20} /> },
     { href: "/admin/clientes", label: "Clientes", icon: <Users size={20} /> },
-    { href: "/admin/sales_items", label: "Items", icon: <RiMoneyDollarCircleLine size={20} /> },
     { href: "/admin/sales_objectives", label: "Objetivo de ventas", icon: <BarChart3 size={20} /> },
     { href: "/admin/sales", label: "Ventas", icon: <LiaMoneyBillWaveSolid size={20} /> },
+    { href: "/admin/sales_items", label: "Items", icon: <RiMoneyDollarCircleLine size={20} /> },
     { href: "/admin/mensajes", label: "Mensajes", icon: <Building2 size={20} /> },
-    { href: "/admin/productos", label: "Productos", icon: <PackageSearch size={20} /> },
   ]
 
   return (
