@@ -61,28 +61,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
-      {/* Main Content */}
       <section className="flex-1 flex flex-col overflow-hidden">
-        {/* Top bar */}
         <header className="bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-8 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-semibold">Bienvenido de vuelta</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Aquí tienes un resumen de tu negocio</p>
+            <div className="flex items-center gap-4">
+              {/* Espacio para elementos del lado izquierdo si se necesitan */}
             </div>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-900 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
-                <Bell size={18} />
-              </button>
-              <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 text-black dark:text-white flex items-center justify-center text-sm font-medium">
-                A
-              </div>
             </div>
           </div>
         </header>
-
-        {/* Content */}
         <main className="flex-1 overflow-y-auto bg-white dark:bg-gray-950 p-8 text-black dark:text-white">{children}</main>
       </section>
     </main>
