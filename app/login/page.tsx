@@ -43,76 +43,56 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md mx-auto">
-        {/* Logo/Brand Section */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Bienvenido</h1>
-          <p className="text-gray-600">Accede a tu panel administrativo</p>
-        </div>
 
-        <Card className="bg-white/80 backdrop-blur-sm shadow-xl border-0 rounded-2xl overflow-hidden">
-          <CardContent className="p-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md mx-auto">
+        <Card className="bg-white shadow-sm border border-gray-200">
+          <CardHeader className="text-center border-b border-gray-100">
+            <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-6 h-6 text-white" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-gray-900">Iniciar Sesión</CardTitle>
+            <p className="text-gray-600 mt-2">Accede al panel administrativo</p>
+          </CardHeader>
+
+          <CardContent className="p-6">
             <form onSubmit={handleLogin} className="space-y-6">
-              {/* Email Field */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 block">
-                  Correo electrónico
-                </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <Input
                     type="email"
-                    placeholder="tu@email.com"
+                    placeholder="Correo electrónico"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-12 h-14 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-gray-50/50 rounded-xl text-gray-900 placeholder:text-gray-400 transition-all duration-200"
+                    className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white"
                     required
                   />
                 </div>
               </div>
 
-              {/* Password Field */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 block">
-                  Contraseña
-                </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <Input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    type="password"
+                    placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-12 pr-12 h-14 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 bg-gray-50/50 rounded-xl text-gray-900 placeholder:text-gray-400 transition-all duration-200"
+                    className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white"
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
-                    )}
-                  </button>
                 </div>
               </div>
 
-              {/* Login Button */}
               <Button
                 type="submit"
-                className="w-full h-14 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-sm hover:shadow-md"
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
+                  <div className="flex items-center">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                     Iniciando sesión...
                   </div>
                 ) : (
@@ -121,13 +101,12 @@ export default function LoginPage() {
               </Button>
             </form>
 
-            {/* Support Link */}
-            <div className="text-center pt-8 border-t border-gray-100 mt-8">
+            <div className="text-center pt-6 border-t border-gray-100 mt-6">
               <p className="text-sm text-gray-500">
                 ¿Problemas para acceder?{" "}
                 <a
                   href="mailto:soporte@tecmilenio.mx"
-                  className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                  className="text-blue-600 hover:text-blue-700 font-medium"
                 >
                   Contacta soporte
                 </a>
@@ -136,14 +115,9 @@ export default function LoginPage() {
           </CardContent>
         </Card>
 
-        {/* Company Branding */}
+        {/* Mobile Branding */}
         <div className="text-center mt-8">
-          <p className="text-gray-500 font-medium">Rodzak S.A de C.V</p>
-          <div className="flex items-center justify-center mt-2 space-x-1">
-            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-          </div>
+          <p className="text-gray-500">Rodzak S.A de C.V</p>
         </div>
       </div>
     </div>
